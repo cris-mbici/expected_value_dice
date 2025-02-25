@@ -65,6 +65,7 @@ def dice_rolling():
   if user_continue == "y":
     dice_rolling()
   else:
+    print("Thanks for playing!")
     quit()
   
 dice_rolling()
