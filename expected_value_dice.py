@@ -28,7 +28,6 @@ def dice_rolling():
       else:
         print("Please enter a valid input.")
       break
-
     except ValueError:
       print("Please enter a valid input.")
 
