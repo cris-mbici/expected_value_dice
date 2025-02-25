@@ -48,7 +48,6 @@ def dice_rolling():
     expected_values = []
     expected_values.append(x)
     
-    
   #This is the math behind getting the expected value
   probability = 1 / number_of_faces_calc 
   expected_value = sum(range(number_of_faces_calc))
@@ -69,6 +68,4 @@ def dice_rolling():
   else:
     quit()
   
-
 dice_rolling()
-
