@@ -1,4 +1,4 @@
-# 🎲 Dice Rolling Simulator
+# Dice Rolling Simulator
 
 [Watch the demo](https://github.com/cris-mbici/expected_value_dice/raw/main/dice_roller.mp4)
 . You start by choosing how many dice you want to roll and how many faces each die should have. Once rolled, the program generates a list of sorted results and calculates key stats, 
