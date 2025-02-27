@@ -1,5 +1,5 @@
 # 🎲 Dice Rolling Simulator
-
+[Watch the demo](https://github.com/cris-mbici/expected_value_dice/raw/main/dice_roller.mp4)
 This Python script is a simple yet effective way to simulate rolling dice with customizable settings.
 
 You start by choosing how many dice you want to roll and how many faces each die should have. Once rolled, the program generates a list of sorted results and calculates key stats, 
@@ -26,6 +26,3 @@ A couple of things to note—currently, the program assumes there’s always a m
 Also, the expected value calculation doesn’t account for repeated numbers when rolling multiple dice, something that could be refined in future updates.
 Future improvements could include adding better handling for cases with no mode, 
 supporting weighted dice for more advanced probability simulations, and even incorporating a graphical representation of results for better visualization.
-
-[Watch the demo](https://github.com/cris-mbici/expected_value_dice/raw/main/dice_roller.mp4)
-
