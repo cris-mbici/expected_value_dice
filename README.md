@@ -27,5 +27,5 @@ Also, the expected value calculation doesn’t account for repeated numbers when
 Future improvements could include adding better handling for cases with no mode, 
 supporting weighted dice for more advanced probability simulations, and even incorporating a graphical representation of results for better visualization.
 
-This project is open-source under the MIT License, so feel free to modify and expand it to fit your needs!
+[Watch the demo](https://github.com/cris-mbici/expected_value_dice/raw/main/dice_roller.mp4)
 
