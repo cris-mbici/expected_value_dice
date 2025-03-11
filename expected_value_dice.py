@@ -1,71 +1,65 @@
+from collections import Counter
 import random
 import math
 import statistics
+from tabulate import tabulate
 
+#Our main dice rolling function
 def dice_rolling():
-  #Asks the user how many dice they would like to roll and avoids a ValueError
-  while True:
-    try:
-      dice_number = 0
-      dice_number = input("How many die would you like to roll? ")
-      dice_number_calc = int(dice_number)
-      if dice_number_calc > 0:
-        break
-      else:
-        print("Please enter a valid input.")
-      break
-    except ValueError:
-      print("Please enter a valid input.")
+    while True:
+        try: #Ensures user input is valid, asks number of dice to be rolled
+            dice_number = int(input("How many die would you like to roll? "))
+            if dice_number > 0:
+                break
+            print("Please enter a valid input.")
+        except ValueError:
+            print("Please enter a valid input.")
 
-  #Asks the user how many faces the dice will have and avoids a ValueError
-  while True:
-    try:
-      number_of_faces = 0
-      number_of_faces = input("How many faces will your dice have? ")
-      number_of_faces_calc = int(number_of_faces)
-      if number_of_faces_calc > 0:
-        break
-      else:
-        print("Please enter a valid input.")
-      break
-    except ValueError:
-      print("Please enter a valid input.")
+    while True: #Ensures user input is valid, asks number of faces in dice
+        try:
+            number_of_faces = int(input("How many faces will your dice have? ").strip())
+            if number_of_faces > 0:
+                break
+            print("Please enter a valid input.")
+        except ValueError:
+            print("Please enter a valid input.")
 
-  #This takes our outputs after rolling n times and converts them to a list
-  list_of_dice = []
-  while len(list_of_dice) < dice_number_calc:
-    list_of_dice.append(random.randint(1, number_of_faces_calc))
-  list_of_dice.sort() #Arranges our list in ascending order for median to work well
-  
-  #These are some basic statistics for our rolls
-  mean_value = statistics.mean(list_of_dice)
-  median_value = statistics.median(list_of_dice)
-  mode_value = statistics.mode(list_of_dice)
-  
-  #This creates our initial list of faces [0, 1, 2...] without last digit
-  for x in range(len(list_of_dice)):
-    expected_values = []
-    expected_values.append(x)
-    
-  #This is the math behind getting the expected value
-  probability = 1 / number_of_faces_calc 
-  expected_value = sum(range(number_of_faces_calc))
-  expected_value += number_of_faces_calc #This makes sure our list is inclusive of the last digit
-  expected_value *= probability
+    # Generate and sort dice rolls
+    list_of_dice = sorted(random.randint(1, number_of_faces) for _ in range(dice_number))
 
-  print(f"""
-  Your outcomes are {list_of_dice}
-  Your mean value is {mean_value}
-  Your expected value is {expected_value}      
-  Some other details about your rolls are here:
-  Your median is {median_value} while your mode is {mode_value}""")
+    # Basic statistics calculations
+    mean_value = statistics.mean(list_of_dice)
+    median_value = statistics.median(list_of_dice)
+    mode_value = statistics.mode(list_of_dice)
 
-  #Gives the user the choice to end the program or keep going
-  user_continue = input("Would you like to roll again? (y/n) ")
-  if user_continue == "y":
-    dice_rolling()
-  else:
-    print("Thanks for playing!")
-    quit()
-  
+    # Expected value calculations
+    probability = 1 / number_of_faces
+    expected_value = sum(range(1, number_of_faces + 1)) * probability
+
+    # Standard deviation calculations
+    modified_list = [(x - mean_value) ** 2 for x in list_of_dice]
+    standard_deviation = math.sqrt(sum(modified_list) / len(modified_list))
+
+    # Table data for unique values and their counts
+    counts = Counter(list_of_dice)
+    data = [[num, count] for num, count in counts.items()]
+
+    # Final output
+    print(f"""
+Your outcomes are:
+{tabulate(data, headers=["Number", "Occurrence"], tablefmt="grid")}
+Your mean value is {mean_value:.4g}
+Your expected value is {expected_value:.4g}      
+Your median is {median_value} while your mode is {mode_value:.4g}
+Your standard deviation is {standard_deviation:.4g}
+""")
+
+    # Final prompt to ask user if they'd like to roll again
+    user_continue = input("Would you like to roll again? (y/n) ")
+    if user_continue.lower() == "y":
+        dice_rolling()
+    else:
+        print("Thanks for playing!")
+        quit()
+
 dice_rolling()
