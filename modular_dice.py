@@ -1,6 +1,7 @@
 import random
 import math
 import statistics
+import matplotlib.pyplot as plt
 from collections import Counter
 from tabulate import tabulate  # This just makes the output look cleaner
 
@@ -49,6 +50,19 @@ def calculate_statistics(dice_rolls, number_of_faces):
 # Makes a frequency graph (kinda) using a dictionary
 def generate_graph_data(dice_rolls):
     return dict(Counter(dice_rolls))  # Counts how many times each number shows up
+
+# We're using the graphing module,again sorry for 1000 comments here, this is my learning template
+def plot_graph(graph_data): 
+    number = list(graph_data.keys()) # Convert the dictionary keys (dice roll outcomes) into a list  
+    counts = list(graph_data.values()) # Convert the dictionary values (how many times each outcome appeared) into a list
+
+    plt.bar(numbers, counts, color="skyblue") # Create a bar chart where the x-axis is the dice roll results and the y-axis is how often they appeared
+    plt.xlabel("Dice Roll Outcome") # Label the x-axis so we know what the numbers represent
+    plt.ylabel("Occurrences") # Label the y-axis so we know what the height of each bar means  
+    plt.title("Dice Roll Distribution") # Add a title so it looks neater
+    # Add a light grid in the background to make it easier to read values  
+    plt.grid(axis="y", linestyle="--", alpha=0.5) # Dashed lines, slightly transparent
+    plt.show() # Actually show the graph (otherwise it won't appear)  
 
 # Prints everything nicely (well, as nicely as the terminal allows)
 def display_results(dice_rolls, stats, graph_data):
